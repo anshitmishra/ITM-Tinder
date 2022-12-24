@@ -1,0 +1,14 @@
+splash screen
+login
+signup
+
+home 
+profile 
+message
+request page
+about me
+
+
+socket.io
+backend 
+database
