@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { Image, View, StyleSheet, TextInput, Pressable, Text, Alert, Button } from 'react-native';
-
+// import { useRoute } from '@react-navigation/native';
 
 const Login: any = ({ navigation }: any) => {
   const [email, setEmail] = React.useState<string>("")
   const [password, setPassword] = React.useState<string>("")
-
   const onLogin = () => {
-    Alert.alert("hello " + email)
     navigation.navigate("SignUp")
   }
   return (
@@ -102,6 +100,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "700",
-    opacity:.4
+    opacity: .4
   }
 });

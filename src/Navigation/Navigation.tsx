@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../Screens/SplashScreen';
 import Login from '../Screens/Login';
 import SignUp from '../Screens/signup';
+import Verification from '../Screens/signup/verification';
 
 
 interface NavigationProps { }
@@ -28,6 +29,7 @@ const Navigation = () => {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       {/* login */}
       <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+      <Stack.Screen name="Verification" component={Verification} options={{ title:"Verification"}} />
     </Stack.Navigator>
   </NavigationContainer>
 

@@ -9,9 +9,7 @@ const SplashScreen = (props: SplashScreenProps) => {
     React.useEffect(() => {
       setTimeout(() =>  {
         navigation.dispatch(
-          StackActions.replace('Login', {
-            user: 'jane',
-          })
+          StackActions.replace('Login')
         );
       },1500)
     },[])
@@ -32,7 +30,8 @@ const styles = StyleSheet.create({
     height:"100%",
     display:"flex",
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    backgroundColor:"white"
   },
   containerImage: {
     width:"50%",
