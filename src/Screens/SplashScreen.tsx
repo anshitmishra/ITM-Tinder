@@ -17,7 +17,7 @@ const SplashScreen = (props: SplashScreenProps) => {
   return (
     <View style={styles.container}>
       <Image style={styles.containerImage} source={require('../../assets/logo.png')} />
-      <Text style={styles.containerHeading} >ITM Tinder</Text>
+      <Text style={styles.containerHeading} >ITM Tinder </Text>
       <Text style={styles.containerSubHeading} >made by anshit mishra</Text>
     </View>
   );

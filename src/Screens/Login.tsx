@@ -1,12 +1,23 @@
 import * as React from 'react';
 import { Image, View, StyleSheet, TextInput, Pressable, Text, Alert, Button } from 'react-native';
 // import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login: any = ({ navigation }: any) => {
   const [email, setEmail] = React.useState<string>("")
   const [password, setPassword] = React.useState<string>("")
   const onLogin = () => {
     navigation.navigate("SignUp")
+  }
+  const [userData,setuserData] = React.useState<string | null>("n")
+
+  const getToken = async() => {
+    try {
+      let userData = await AsyncStorage.getItem("auth");
+      setuserData(userData)
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
   }
   return (
     <View style={styles.container}>
@@ -27,8 +38,8 @@ const Login: any = ({ navigation }: any) => {
       </View>
       <View style={styles.containerItem}>
         {/* onPress={onPress} */}
-        <Pressable style={styles.containerButton} onPress={onLogin}>
-          <Text style={styles.containerButtonText}>Login</Text>
+        <Pressable style={styles.containerButton} onPress={getToken}>
+          <Text style={styles.containerButtonText}>Login {userData}</Text>
         </Pressable>
       </View>
       <View style={styles.containerItem}>

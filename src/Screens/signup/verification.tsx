@@ -1,26 +1,36 @@
 import * as React from 'react';
 import { Image, View, StyleSheet, TextInput, Pressable, Text } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface VerificationProps {
     navigation: any
 }
 
 const Verification = (props: VerificationProps) => {
     const [code, setCode] = React.useState<string>("")
-    const onLogin = () => {
-        props.navigation.navigate("Verification", { emails: "anshitmishra03@gmail.com" })
-    }
+    // const onLogin = () => {
+    //     props.navigation.navigate("Profile")
+    // }
+
+    const onLogin = async () => {
+        try {
+          await AsyncStorage.setItem("auth", "ASd");
+          // Configure axios headers
+        props.navigation.navigate("Profile")
+          
+        } catch (error) {
+          Promise.reject(error);
+        }
+      };
     return (
         <View style={styles.container}>
             <Image source={require('../../../assets/verification.png')} style={styles.ImageProp} />
             <View style={[styles.containerItem, styles.shadowProp]}>
-                <TextInput style={styles.containerInput} placeholder='verification code'
+                <TextInput style={styles.containerInput} maxLength={6} placeholder='verification code'
                     autoComplete='sms-otp'
                     keyboardType='decimal-pad'
                     onChangeText={setCode} value={code}
                 />
             </View>
-
             <View style={styles.containerItem}>
                 {/* onPress={onPress} */}
                 <Pressable style={styles.containerButton} onPress={onLogin}>
