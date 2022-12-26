@@ -10,7 +10,6 @@ import Profile from '../Screens/profile/profile';
 import ProfileEdit from '../Screens/profile/editProfile';
 import Icon from 'react-native-vector-icons/Feather';
 
-
 interface NavigationProps { }
 
 const Navigation = () => {
