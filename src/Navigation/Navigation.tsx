@@ -13,6 +13,7 @@ import MessageMain from '../Screens/message/main';
 import MessagePage from '../Screens/message/message';
 import Home from '../Screens/home/home';
 import Info from '../Screens/home/info';
+import ProfileView from '../Screens/profile/profileView';
 
 interface NavigationProps { }
 
@@ -52,6 +53,8 @@ const Navigation = () => {
         ),
       })} />
 
+      {/* profile view */}
+      <Stack.Screen name="ProfileView" component={ProfileView} options={{ title: "Profile" }} />
       {/* profile */}
       <Stack.Screen name="Profile" component={Profile} options={({ navigation }) => ({
         title: 'Profile',

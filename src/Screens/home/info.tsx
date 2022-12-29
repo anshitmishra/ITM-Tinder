@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Pressable, Linking,Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Linking, Image, ScrollView } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome5"
 import Icon2 from "react-native-vector-icons/AntDesign"
 
@@ -49,7 +49,7 @@ const Info = (props: InfoProps) => {
                 </View>
             </ScrollView>
             <View style={styles.containerBottom}>
-                <View style={styles.containerBottomHolder}>
+                <View style={[styles.containerBottomHolder, styles.elevation]}>
                     <View style={styles.containerBottomHolderItem}>
                         <Pressable onPress={() => { NavigationHandler("home") }}><Icon2 name="home" size={25}></Icon2></Pressable>
                     </View>
@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         alignSelf: "center",
         backgroundColor: "#eee",
-        overflow:"hidden"
+        overflow: "hidden"
     },
-    containerTopImageimg:{
+    containerTopImageimg: {
         position: "relative",
         width: "100%",
-        height:"100%",
-        resizeMode:"cover",
+        height: "100%",
+        resizeMode: "cover",
     },
     containerTopName: {
         position: "relative",
@@ -196,5 +196,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
         // backgroundColor:"black"
-    }
+    },
+    elevation: {
+        shadowColor: '#000',
+        elevation: 10,
+    },
 });
