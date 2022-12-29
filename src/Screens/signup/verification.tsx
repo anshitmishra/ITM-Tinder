@@ -15,7 +15,7 @@ const Verification = (props: VerificationProps) => {
         try {
           await AsyncStorage.setItem("auth", "ASd");
           // Configure axios headers
-        props.navigation.navigate("Profile")
+        props.navigation.navigate("Home")
           
         } catch (error) {
           Promise.reject(error);
@@ -31,6 +31,7 @@ const Verification = (props: VerificationProps) => {
                     onChangeText={setCode} value={code}
                 />
             </View>
+ 
             <View style={styles.containerItem}>
                 {/* onPress={onPress} */}
                 <Pressable style={styles.containerButton} onPress={onLogin}>

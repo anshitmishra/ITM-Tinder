@@ -9,6 +9,10 @@ import Verification from '../Screens/signup/verification';
 import Profile from '../Screens/profile/profile';
 import ProfileEdit from '../Screens/profile/editProfile';
 import Icon from 'react-native-vector-icons/Feather';
+import MessageMain from '../Screens/message/main';
+import MessagePage from '../Screens/message/message';
+import Home from '../Screens/home/home';
+import Info from '../Screens/home/info';
 
 interface NavigationProps { }
 
@@ -26,19 +30,46 @@ const Navigation = () => {
       <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
       {/* verification */}
       <Stack.Screen name="Verification" component={Verification} options={{ title: "Verification" }} />
+
+      {/* Home */}
+      <Stack.Screen name="Home" component={Home} options={({ navigation }) => ({
+        title: "ITM Tinder", headerBackVisible: false, headerRight: () => (
+          <Icon
+            onPress={() => navigation.navigate('Message')}
+            name="send"
+            color={"#444"} size={25}
+          />
+        ),
+      })} />
+      {/* Info */}
+      <Stack.Screen name="Info" component={Info} options={({ navigation }) => ({
+        title: "ITM Tinder", headerBackVisible: false, headerRight: () => (
+          <Icon
+            onPress={() => navigation.navigate('Message')}
+            name="send"
+            color={"#444"} size={25}
+          />
+        ),
+      })} />
+
       {/* profile */}
       <Stack.Screen name="Profile" component={Profile} options={({ navigation }) => ({
-              title: 'Profile',
-              headerRight: () => (
-                <Icon
-                  onPress={() => navigation.navigate('EditProfile')}
-                  name="settings"
-                  color={"#444"} size={20 }
-                />
-              ),
-            })} />
+        title: 'Profile',
+        headerRight: () => (
+          <Icon
+            onPress={() => navigation.navigate('EditProfile')}
+            name="settings"
+            color={"#444"} size={20}
+          />
+        ),
+      })} />
       {/* edit profile */}
       <Stack.Screen name="EditProfile" component={ProfileEdit} options={{ title: "Edit Profile" }} />
+
+      {/* message */}
+      <Stack.Screen name="Message" component={MessageMain} options={{ title: "Messages" }} />
+      {/* message page */}
+      <Stack.Screen name="MessagePage" component={MessagePage} options={{ headerShown: false }} />
     </Stack.Navigator>
   </NavigationContainer>
 
