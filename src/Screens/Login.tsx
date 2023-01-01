@@ -2,23 +2,79 @@ import * as React from 'react';
 import { Image, View, StyleSheet, TextInput, Pressable, Text, Alert, Button } from 'react-native';
 // import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import List from '../apis/list';
+import AlertMessage from './utils/alert';
 const Login: any = ({ navigation }: any) => {
+
+  const ApiLinks = List();
+
+  const [alertDisplay, setAlertDisplay] = React.useState<boolean>(false);
+  const [alertType, setAlertType] = React.useState<string>("")
+  const [alertMessage, setAlertMessage] = React.useState<string>("")
+  const setAlertDisplayHolder = (data: boolean) => {
+    setAlertDisplay(data)
+  }
+  const [loading, setLoading] = React.useState<boolean>(false)
+
   const [email, setEmail] = React.useState<string>("")
   const [password, setPassword] = React.useState<string>("")
   const onLogin = () => {
-    navigation.navigate("SignUp")
+    navigation.navigate("Home")
   }
-  const [userData,setuserData] = React.useState<string | null>("n")
 
-  const getToken = async() => {
-    try {
-      let userData = await AsyncStorage.getItem("auth");
-      setuserData(userData)
-    } catch (error) {
-      console.log("Something went wrong", error);
+  const Login = () => {
+    if (email == "" || password == "") {
+      setAlertDisplayHolder(true)
+      setAlertType("error")
+      setAlertMessage("email or password is empty")
+    } else {
+      const payload = {
+        'email': email,
+        'password': password
+      }
+      setLoading(true)
+      ApiLinks.Login(payload).then((data: any) => {
+        if (data?.status == "false") {
+          setAlertDisplayHolder(true)
+          setAlertType("error")
+          setAlertMessage(data.message)
+          setLoading(false)
+        } else {
+          if(data.message == "Login Successfully."){
+            setAlertDisplayHolder(true)
+            setAlertType("success")
+            setAlertMessage(data.message)
+            getToken(data?.data?.token)
+          }else{
+            setAlertDisplayHolder(true)
+            setAlertType("error")
+            setAlertMessage(data?.message)
+          }
+          setLoading(false)
+        }
+      }).catch((err) => {
+        setLoading(false)
+        setAlertDisplayHolder(true)
+        setAlertType("error")
+        setAlertMessage(err.message)
+      });
     }
   }
+
+
+  const getToken = async (data: string) => {
+    try {
+      await AsyncStorage.setItem("auth", `${data}`);
+      onLogin();
+    } catch (error) {
+      setLoading(false)
+      setAlertDisplayHolder(true)
+      setAlertType("error")
+      setAlertMessage("something is worng in login contact developer")
+    }
+  }
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.containerItem}>
@@ -38,16 +94,18 @@ const Login: any = ({ navigation }: any) => {
       </View>
       <View style={styles.containerItem}>
         {/* onPress={onPress} */}
-        <Pressable style={styles.containerButton} onPress={getToken}>
-          <Text style={styles.containerButtonText}>Login {userData}</Text>
+        <Pressable style={styles.containerButton} onPress={Login}>
+          <Text style={styles.containerButtonText}>{loading ? "Logging in..." : "Login"}</Text>
         </Pressable>
       </View>
       <View style={styles.containerItem}>
-        <Pressable onPress={onLogin}>
+        <Pressable onPress={() => {navigation.navigate("SignUp")}}>
           <Text style={styles.containerText}>Don't have Account?? Signup</Text>
         </Pressable>
       </View>
+      <AlertMessage type={alertType} message={alertMessage} display={setAlertDisplayHolder} displayCon={alertDisplay} />
     </View>
+
   );
 };
 

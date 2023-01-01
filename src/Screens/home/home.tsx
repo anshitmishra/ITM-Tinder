@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome5"
 import Icon2 from "react-native-vector-icons/AntDesign"
-
+import { useNavigation } from '@react-navigation/native';
 interface HomeProps {
     navigation: any
 }
@@ -14,6 +14,12 @@ const HomeMain = (props:HomeProps) => {
             props.navigation.navigate("ProfileView")
         }
     }
+    const navigation = useNavigation<any>();
+    const goToMessageScreen = () => {
+        navigation.navigate('ProfileView', {
+          'token':"3c863da559610f2f499d332e7ba6fc9d",
+        });
+      };
     return (
         <>
             <View style={styles.MainContainer} >
@@ -28,7 +34,7 @@ const HomeMain = (props:HomeProps) => {
                 </View>
                 <View style={styles.MainContainerBottom} >
                     <Pressable style={[styles.MainContainerBottonClose, styles.elevation]}><Icon name='times' size={30} color={"#ed2939"} /></Pressable>
-                    <Pressable style={[styles.MainContainerBottonEye, styles.elevation]} onPress={() => {NavigationHandler("view")}}><Icon name='eye' size={30} color={"royalblue"} /></Pressable>
+                    <Pressable style={[styles.MainContainerBottonEye, styles.elevation]} onPress={goToMessageScreen}><Icon name='eye' size={30} color={"royalblue"} /></Pressable>
                     <Pressable style={[styles.MainContainerBottonHeart, styles.elevation]}><Icon name='heart' size={30} color={"#90EE90"} /></Pressable>
                 </View>
             </View>

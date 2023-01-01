@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Image, View, StyleSheet, TextInput, Pressable, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 interface VerificationProps {
     navigation: any
 }

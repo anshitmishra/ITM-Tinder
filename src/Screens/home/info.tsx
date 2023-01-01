@@ -21,7 +21,7 @@ const Info = (props: InfoProps) => {
     }
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.containerTop}>
+            <ScrollView style={styles.containerTop} contentContainerStyle={{paddingBottom:70}} >
                 <Text style={styles.containerTopHeading}>About Developer</Text>
                 <View style={styles.containerTopImageHolder}>
                     <View style={styles.containerTopImage}>
@@ -35,7 +35,7 @@ const Info = (props: InfoProps) => {
                 {/* warning */}
                 <View style={styles.containerTopDisclaimer}>
                     <Text style={styles.containerTopDisclaimerText}>
-                        Hey everyone, I am an open-source developer. I have developed this app just for fun. In This, I develop a new algorithm called flames. for more details view my GitHub page. and this app is just for fun so please use this app carefully and we don't charge any money so don't pay on this app.
+                        Hey everyone, I am an open-source developer. I have developed this app just for fun. In This, I develop a new algorithm called flames. for more details view my GitHub page. and this app is just for fun so please use this app carefully and we don't charge any money so don't pay to anyone on this app.
                     </Text>
 
 

@@ -1,16 +1,33 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { Image, View, StyleSheet, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackActions } from '@react-navigation/native';
 interface SplashScreenProps {}
 
 const SplashScreen = (props: SplashScreenProps) => {
-    const navigation = useNavigation<any>();
+  const [userData, setuserData] = React.useState<string | null>("")
+  const navigation = useNavigation<any>();
+  const getToken = async () => {
+    try {
+     const data = await AsyncStorage.getItem("auth");
+     setuserData(data);
+    } catch (error) {
+     
+    }
+  }
     React.useEffect(() => {
+      getToken();
       setTimeout(() =>  {
-        navigation.dispatch(
-          StackActions.replace('Login')
-        );
+        if(userData == ""){
+          navigation.dispatch(
+            StackActions.replace('Home')
+          );
+        }else{
+          navigation.dispatch(
+            StackActions.replace('Login')
+          );
+        }
       },1500)
     },[])
     
